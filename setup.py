@@ -12,9 +12,10 @@ class InstallCommand(install):
 
     def initialize_options(self):
         install.initialize_options(self)
-        self.no_ml = None
+        self.no_ml = True
 
     def finalize_options(self):
+        self.no_ml = True
         install.finalize_options(self)
         if self.no_ml:
             dist = self.distribution
@@ -24,12 +25,10 @@ class InstallCommand(install):
                 'talon.signature',
                 'talon.signature.*',
             ])
-            for not_required in ['numpy', 'scipy', 'scikit-learn==0.16.1']:
-                dist.install_requires.remove(not_required)
 
 
 setup(name='talon',
-      version='1.4.8',
+      version='1.4.8sf',
       description=("Mailgun library "
                    "to extract message quotations and signatures."),
       long_description=open("README.rst").read(),
@@ -46,9 +45,6 @@ setup(name='talon',
       install_requires=[
           "lxml>=2.3.3",
           "regex>=1",
-          "numpy",
-          "scipy",
-          "scikit-learn==0.16.1", # pickled versions of classifier, else rebuild
           'chardet>=1.0.1',
           'cchardet>=0.3.5',
           'cssselect',
