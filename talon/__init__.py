@@ -9,5 +9,3 @@ except ImportError:
 
 def init():
     register_xpath_extensions()
-    if ML_ENABLED:
-        signature.initialize()
